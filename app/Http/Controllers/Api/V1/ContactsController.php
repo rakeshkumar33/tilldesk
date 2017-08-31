@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Api\ApiController;
 use Illuminate\Http\Request;
 
-class ClientsController extends ApiController
+class ContactsController extends ApiController
 {
     /**
      * Display a listing of the resource.

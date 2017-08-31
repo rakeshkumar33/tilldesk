@@ -3,18 +3,27 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\ApiController;
+use App\Repositories\User\EloquentUserRepository;
 use Illuminate\Http\Request;
 
 class UsersController extends ApiController
 {
+
+    protected $user;
+
+    public function __construct(EloquentUserRepository $user)
+    {
+        $this->user = $user;
+    }
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return EloquentUserRepository[]|\Illuminate\Database\Eloquent\Collection
      */
     public function index()
     {
-        //
+        return $this->user->all();
     }
 
     /**

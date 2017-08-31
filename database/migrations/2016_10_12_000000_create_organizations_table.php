@@ -15,7 +15,7 @@ class CreateOrganizationsTable extends Migration
     {
         Schema::create('organizations', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('login');
+            $table->string('name');
             $table->string('billing_email');
             $table->string('company_name');
             $table->string('plan');
@@ -46,6 +46,8 @@ class CreateOrganizationsTable extends Migration
      */
     public function down()
     {
+
+        Schema::dropIfExists('organization_user');
         Schema::dropIfExists('organizations');
     }
 }
