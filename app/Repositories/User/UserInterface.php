@@ -8,5 +8,4 @@ interface UserInterface
 
     public function findBy($att, $column);
 
-    public function all();
 }

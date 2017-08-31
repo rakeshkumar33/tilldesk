@@ -3,35 +3,43 @@
 namespace App\Repositories\User;
 
 use App\Entities\User;
+use App\Repositories\Base\EloquentRepository;
 
-class EloquentUserRepository implements UserInterface
+
+class EloquentUserRepository extends EloquentRepository
 {
-    protected $user;
 
-    public function __construct(User $user)
+    protected $modelInstance;
+
+    /**
+     * EloquentUserRepository constructor.
+     * @param User $modelInstance
+     */
+    public function __construct(User $modelInstance)
     {
-        $this->user = $user;
+        $this->modelInstance = $modelInstance;
     }
 
-    public function find($id)
+
+    public function all(array $select = array('*'))
     {
-        return $this->user->find($id);
+        return parent::all($select);
     }
+
+    public function create(array $data)
+    {
+        return parent::create($data);
+    }
+
+
+    public function update($id, array $data)
+    {
+        return parent::update($id, $data);
+    }
+
 
     public function findBy($att, $column)
     {
-        return $this->user->where($att, $column);
-    }
-
-    public function all() {
-        return $this->user->all();
-    }
-
-    public function create(array $data) {
-
-    }
-
-    public function update($id, array $data) {
-
+        return $this->modelInstance->where($att, $column);
     }
 }

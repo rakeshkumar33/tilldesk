@@ -3,10 +3,19 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\ApiController;
+use App\Repositories\Person\EloquentPersonRepository;
 use Illuminate\Http\Request;
 
 class PeopleController extends ApiController
 {
+
+    protected $person;
+
+    public function __construct(EloquentPersonRepository $person)
+    {
+        $this->person = $person;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,18 +23,10 @@ class PeopleController extends ApiController
      */
     public function index()
     {
-        //
+        return $this->person->paginate();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +36,7 @@ class PeopleController extends ApiController
      */
     public function store(Request $request)
     {
-        //
+        return $this->person->paginate($request->all());
     }
 
     /**
@@ -46,19 +47,9 @@ class PeopleController extends ApiController
      */
     public function show($id)
     {
-        //
+        return $this->person->find($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -69,7 +60,7 @@ class PeopleController extends ApiController
      */
     public function update(Request $request, $id)
     {
-        //
+        return $this->person->update($id, $request->all());
     }
 
     /**
@@ -80,6 +71,6 @@ class PeopleController extends ApiController
      */
     public function destroy($id)
     {
-        //
+        return $this->person->delete($id);
     }
 }

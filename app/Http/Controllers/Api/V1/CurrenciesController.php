@@ -3,10 +3,19 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\ApiController;
+use App\Repositories\Currency\EloquentCurrencyRepository;
 use Illuminate\Http\Request;
 
 class CurrenciesController extends ApiController
 {
+
+    protected $currency;
+
+    public function __construct(EloquentCurrencyRepository $currency)
+    {
+        $this->currency = $currency;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,18 +23,9 @@ class CurrenciesController extends ApiController
      */
     public function index()
     {
-        //
+        return $this->currency->paginate();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +35,7 @@ class CurrenciesController extends ApiController
      */
     public function store(Request $request)
     {
-        //
+        return $this->currency->create($request->all());
     }
 
     /**
@@ -46,19 +46,11 @@ class CurrenciesController extends ApiController
      */
     public function show($id)
     {
-        //
+        return $this->currency->find($id);
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
@@ -69,7 +61,7 @@ class CurrenciesController extends ApiController
      */
     public function update(Request $request, $id)
     {
-        //
+        return $this->currency->update($id, $request->all());
     }
 
     /**
@@ -80,6 +72,6 @@ class CurrenciesController extends ApiController
      */
     public function destroy($id)
     {
-        //
+        return $this->currency->delete($id);
     }
 }

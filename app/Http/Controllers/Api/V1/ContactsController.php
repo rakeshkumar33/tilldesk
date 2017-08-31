@@ -3,10 +3,19 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\ApiController;
+use App\Repositories\Contact\EloquentContactRepository;
 use Illuminate\Http\Request;
 
 class ContactsController extends ApiController
 {
+
+    protected $contact;
+
+    public function __construct(EloquentContactRepository $contact)
+    {
+        $this->contact = $contact;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,18 +23,9 @@ class ContactsController extends ApiController
      */
     public function index()
     {
-        //
+        return $this->contact->paginate();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +35,7 @@ class ContactsController extends ApiController
      */
     public function store(Request $request)
     {
-        //
+        return $this->contact->create($request->all());
     }
 
     /**
@@ -46,19 +46,9 @@ class ContactsController extends ApiController
      */
     public function show($id)
     {
-        //
+        return $this->contact->find($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -69,7 +59,7 @@ class ContactsController extends ApiController
      */
     public function update(Request $request, $id)
     {
-        //
+        return $this->contact->update($id, $request->all());
     }
 
     /**
@@ -80,6 +70,6 @@ class ContactsController extends ApiController
      */
     public function destroy($id)
     {
-        //
+        return $this->contact->delete($id);
     }
 }

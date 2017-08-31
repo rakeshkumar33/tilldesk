@@ -3,10 +3,19 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\ApiController;
+use App\Repositories\Person\EloquentCountryRepository;
 use Illuminate\Http\Request;
 
 class CountriesController extends ApiController
 {
+
+    protected $country;
+
+    public function __construct(EloquentCountryRepository $country)
+    {
+        $this->country = $country;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,17 +23,7 @@ class CountriesController extends ApiController
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return $this->country->paginate();
     }
 
     /**
@@ -35,7 +34,7 @@ class CountriesController extends ApiController
      */
     public function store(Request $request)
     {
-        //
+        return $this->country->create($request->all());
     }
 
     /**
@@ -46,18 +45,7 @@ class CountriesController extends ApiController
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return $this->country->find($id);
     }
 
     /**
@@ -69,7 +57,7 @@ class CountriesController extends ApiController
      */
     public function update(Request $request, $id)
     {
-        //
+        return $this->country->update($id, $request->all());
     }
 
     /**
@@ -80,6 +68,6 @@ class CountriesController extends ApiController
      */
     public function destroy($id)
     {
-        //
+        return $this->country->delete($id);
     }
 }

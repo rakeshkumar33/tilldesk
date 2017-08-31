@@ -3,10 +3,19 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\ApiController;
+use App\Repositories\Language\EloquentLanguageRepository;
 use Illuminate\Http\Request;
 
 class LanguagesController extends ApiController
 {
+
+    protected $language;
+
+    public function __construct(EloquentLanguageRepository $language)
+    {
+        $this->language = $language;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,17 +23,7 @@ class LanguagesController extends ApiController
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return $this->language->all();
     }
 
     /**
@@ -35,7 +34,7 @@ class LanguagesController extends ApiController
      */
     public function store(Request $request)
     {
-        //
+        return $this->language->create($request->all());
     }
 
     /**
@@ -46,19 +45,10 @@ class LanguagesController extends ApiController
      */
     public function show($id)
     {
-        //
+        return $this->language->find($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
@@ -69,7 +59,7 @@ class LanguagesController extends ApiController
      */
     public function update(Request $request, $id)
     {
-        //
+        return $this->language->update($id, $request->all());
     }
 
     /**
@@ -80,6 +70,6 @@ class LanguagesController extends ApiController
      */
     public function destroy($id)
     {
-        //
+        return $this->language->delete($id);
     }
 }
