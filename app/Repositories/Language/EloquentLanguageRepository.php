@@ -2,16 +2,17 @@
 
 namespace App\Repositories\Language;
 
-use App\Entities\Contact;
-use App\Entities\Person;
+use App\Entities\Language;
 use App\Repositories\Base\EloquentRepository;
+use Illuminate\Foundation\Application;
 
 class EloquentLanguageRepository extends EloquentRepository
 {
     protected $modelInstance;
 
-    public function __construct(Person $modelInstance)
+    public function __construct(Application $app, Language $modelInstance)
     {
+        parent::__construct($app);
         $this->modelInstance = $modelInstance;
     }
 

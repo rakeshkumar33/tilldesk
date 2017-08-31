@@ -4,13 +4,16 @@ namespace App\Repositories\Contact;
 
 use App\Entities\Contact;
 use App\Repositories\Base\EloquentRepository;
+use Illuminate\Foundation\Application;
 
 class EloquentContactRepository extends EloquentRepository
 {
     protected $modelInstance;
 
-    public function __construct(Contact $modelInstance)
+
+    public function __construct(Application $app, Contact $modelInstance)
     {
+        parent::__construct($app);
         $this->modelInstance = $modelInstance;
     }
 

@@ -2,18 +2,21 @@
 
 namespace App\Repositories\Person;
 
-use App\Entities\Contact;
 use App\Entities\Person;
 use App\Repositories\Base\EloquentRepository;
+use Illuminate\Foundation\Application;
 
 class EloquentPersonRepository extends EloquentRepository
 {
     protected $modelInstance;
 
-    public function __construct(Person $modelInstance)
+
+    public function __construct(Application $app, Person $modelInstance)
     {
+        parent::__construct($app);
         $this->modelInstance = $modelInstance;
     }
+
 
     public function all(array $select = array('*'))
     {

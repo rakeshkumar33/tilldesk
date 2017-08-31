@@ -4,15 +4,19 @@ namespace App\Repositories\Currency;
 
 use App\Entities\Currency;
 use App\Repositories\Base\EloquentRepository;
+use Illuminate\Foundation\Application;
 
 class EloquentCurrencyRepository extends EloquentRepository
 {
     protected $modelInstance;
 
-    public function __construct(Currency $modelInstance)
+
+    public function __construct(Application $app, Currency $modelInstance)
     {
+        parent::__construct($app);
         $this->modelInstance = $modelInstance;
     }
+
 
     public function all(array $select = array('*'))
     {

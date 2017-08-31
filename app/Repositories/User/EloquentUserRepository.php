@@ -4,22 +4,18 @@ namespace App\Repositories\User;
 
 use App\Entities\User;
 use App\Repositories\Base\EloquentRepository;
+use Illuminate\Foundation\Application;
 
 
 class EloquentUserRepository extends EloquentRepository
 {
-
     protected $modelInstance;
 
-    /**
-     * EloquentUserRepository constructor.
-     * @param User $modelInstance
-     */
-    public function __construct(User $modelInstance)
+    public function __construct(Application $app, User $modelInstance)
     {
+        parent::__construct($app);
         $this->modelInstance = $modelInstance;
     }
-
 
     public function all(array $select = array('*'))
     {

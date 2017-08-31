@@ -4,14 +4,16 @@ namespace App\Repositories\Country;
 
 use App\Entities\Country;
 use App\Repositories\Base\EloquentRepository;
+use Illuminate\Foundation\Application;
 
 
 class EloquentCountryRepository extends EloquentRepository
 {
     protected $modelInstance;
 
-    public function __construct(Country $modelInstance)
+    public function __construct(Application $app, Country $modelInstance)
     {
+        parent::__construct($app);
         $this->modelInstance = $modelInstance;
     }
 

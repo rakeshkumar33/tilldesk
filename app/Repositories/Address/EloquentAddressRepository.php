@@ -4,15 +4,19 @@ namespace App\Repositories\Address;
 
 use App\Entities\Address;
 use App\Repositories\Base\EloquentRepository;
+use Illuminate\Foundation\Application;
 
 class EloquentAddressRepository extends EloquentRepository
 {
     protected $modelInstance;
 
-    public function __construct(Address $modelInstance)
+
+    public function __construct(Application $app, Address $modelInstance)
     {
+        parent::__construct($app);
         $this->modelInstance = $modelInstance;
     }
+
 
     public function paginate($perPage = 10, array $select = array('*'))
     {
