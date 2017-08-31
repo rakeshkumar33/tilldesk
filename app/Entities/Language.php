@@ -4,7 +4,7 @@ namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Contact extends Model
+class Language extends Model
 {
-    //
+    protected $guarded = [];
 }

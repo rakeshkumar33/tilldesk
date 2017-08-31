@@ -4,7 +4,7 @@ namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Currency extends Model
+class Organization extends Model
 {
     protected $guarded = [];
 }
