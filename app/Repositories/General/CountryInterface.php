@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Country;
+namespace App\Repositories\General;
 
 interface CountryInterface
 {

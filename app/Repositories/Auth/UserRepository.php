@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Repositories\User;
+namespace App\Repositories\Auth;
 
 use App\Entities\User;
-use App\Repositories\Base\EloquentRepository;
+use App\Repositories\EloquentRepository;
 use Illuminate\Foundation\Application;
 
 
-class EloquentUserRepository extends EloquentRepository
+class UserRepository extends EloquentRepository
 {
     protected $modelInstance;
 

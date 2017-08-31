@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories\Address;
+namespace App\Repositories\General;
 
-interface AddressInterface
+interface CurrencyInterface
 {
     public function find($id);
 

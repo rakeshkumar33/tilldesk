@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V1\General;;
 
 use App\Http\Controllers\Api\ApiController;
-use App\Repositories\Currency\EloquentCurrencyRepository;
+use App\Repositories\General\LanguageRepository;
 use Illuminate\Http\Request;
 
-class CurrenciesController extends ApiController
+class LanguagesController extends ApiController
 {
 
-    protected $currency;
+    protected $language;
 
-    public function __construct(EloquentCurrencyRepository $currency)
+    public function __construct(LanguageRepository $language)
     {
-        $this->currency = $currency;
+        $this->language = $language;
     }
 
     /**
@@ -23,9 +23,8 @@ class CurrenciesController extends ApiController
      */
     public function index()
     {
-        return $this->currency->paginate();
+        return $this->language->all();
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +34,7 @@ class CurrenciesController extends ApiController
      */
     public function store(Request $request)
     {
-        return $this->currency->create($request->all());
+        return $this->language->create($request->all());
     }
 
     /**
@@ -46,8 +45,7 @@ class CurrenciesController extends ApiController
      */
     public function show($id)
     {
-        return $this->currency->find($id);
-
+        return $this->language->find($id);
     }
 
 
@@ -61,7 +59,7 @@ class CurrenciesController extends ApiController
      */
     public function update(Request $request, $id)
     {
-        return $this->currency->update($id, $request->all());
+        return $this->language->update($id, $request->all());
     }
 
     /**
@@ -72,6 +70,6 @@ class CurrenciesController extends ApiController
      */
     public function destroy($id)
     {
-        return $this->currency->delete($id);
+        return $this->language->delete($id);
     }
 }

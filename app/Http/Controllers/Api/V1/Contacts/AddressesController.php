@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V1\Contacts;
 
 use App\Http\Controllers\Api\ApiController;
-use App\Repositories\Person\EloquentPersonRepository;
+use App\Repositories\Contact\AddressRepository;
 use Illuminate\Http\Request;
 
-class PeopleController extends ApiController
+class AddressesController extends ApiController
 {
+    protected $address;
 
-    protected $person;
-
-    public function __construct(EloquentPersonRepository $person)
+    public function __construct(AddressRepository $address)
     {
-        $this->person = $person;
+        $this->address = $address;
     }
 
     /**
@@ -23,54 +22,52 @@ class PeopleController extends ApiController
      */
     public function index()
     {
-        return $this->person->paginate();
+        return $this->address->paginate();
     }
-
 
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        return $this->person->paginate($request->all());
+        return $this->address->create($request->all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return $this->person->find($id);
+        return $this->address->find($id);
     }
-
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        return $this->person->update($id, $request->all());
+        return $this->address->update($id, $request->all());
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        return $this->person->delete($id);
+        return $this->address->delete($id);
     }
 }

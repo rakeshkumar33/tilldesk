@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V1\Contacts;
 
 use App\Http\Controllers\Api\ApiController;
-use App\Repositories\Language\EloquentLanguageRepository;
+use App\Repositories\Contact\ContactRepository;
 use Illuminate\Http\Request;
 
-class LanguagesController extends ApiController
+class ContactsController extends ApiController
 {
 
-    protected $language;
+    protected $contact;
 
-    public function __construct(EloquentLanguageRepository $language)
+    public function __construct(ContactRepository $contact)
     {
-        $this->language = $language;
+        $this->contact = $contact;
     }
 
     /**
@@ -23,8 +23,9 @@ class LanguagesController extends ApiController
      */
     public function index()
     {
-        return $this->language->all();
+        return $this->contact->paginate();
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -34,7 +35,7 @@ class LanguagesController extends ApiController
      */
     public function store(Request $request)
     {
-        return $this->language->create($request->all());
+        return $this->contact->create($request->all());
     }
 
     /**
@@ -45,9 +46,8 @@ class LanguagesController extends ApiController
      */
     public function show($id)
     {
-        return $this->language->find($id);
+        return $this->contact->find($id);
     }
-
 
 
     /**
@@ -59,7 +59,7 @@ class LanguagesController extends ApiController
      */
     public function update(Request $request, $id)
     {
-        return $this->language->update($id, $request->all());
+        return $this->contact->update($id, $request->all());
     }
 
     /**
@@ -70,6 +70,6 @@ class LanguagesController extends ApiController
      */
     public function destroy($id)
     {
-        return $this->language->delete($id);
+        return $this->contact->delete($id);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Base;
+namespace App\Repositories;
 
 use Illuminate\Foundation\Application;
 use Exception;

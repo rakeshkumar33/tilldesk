@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Repositories\Address;
+namespace App\Repositories\Contact;
 
 use App\Entities\Address;
-use App\Repositories\Base\EloquentRepository;
+use App\Repositories\EloquentRepository;
 use Illuminate\Foundation\Application;
 
-class EloquentAddressRepository extends EloquentRepository
+class AddressRepository extends EloquentRepository
 {
     protected $modelInstance;
 

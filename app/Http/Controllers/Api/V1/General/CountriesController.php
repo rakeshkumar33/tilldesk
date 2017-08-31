@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V1\General;
 
 use App\Http\Controllers\Api\ApiController;
-use App\Repositories\Address\EloquentAddressRepository;
+use App\Repositories\General\CountryRepository;
 use Illuminate\Http\Request;
 
-class AddressesController extends ApiController
+class CountriesController extends ApiController
 {
-    protected $address;
 
-    public function __construct(EloquentAddressRepository $address)
+    protected $country;
+
+    public function __construct(CountryRepository $country)
     {
-        $this->address = $address;
+        $this->country = $country;
     }
 
     /**
@@ -22,52 +23,51 @@ class AddressesController extends ApiController
      */
     public function index()
     {
-        return $this->address->paginate();
+        return $this->country->paginate();
     }
-
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        return $this->address->create($request->all());
+        return $this->country->create($request->all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return $this->address->find($id);
+        return $this->country->find($id);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        return $this->address->update($id, $request->all());
+        return $this->country->update($id, $request->all());
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        return $this->address->delete($id);
+        return $this->country->delete($id);
     }
 }

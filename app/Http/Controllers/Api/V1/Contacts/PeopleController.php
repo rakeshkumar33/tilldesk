@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V1\Contacts;
 
 use App\Http\Controllers\Api\ApiController;
-use App\Repositories\Contact\EloquentContactRepository;
+use App\Repositories\Contact\PersonRepository;
 use Illuminate\Http\Request;
 
-class ContactsController extends ApiController
+class PeopleController extends ApiController
 {
 
-    protected $contact;
+    protected $person;
 
-    public function __construct(EloquentContactRepository $contact)
+    public function __construct(PersonRepository $person)
     {
-        $this->contact = $contact;
+        $this->person = $person;
     }
 
     /**
@@ -23,8 +23,9 @@ class ContactsController extends ApiController
      */
     public function index()
     {
-        return $this->contact->paginate();
+        return $this->person->paginate();
     }
+
 
 
     /**
@@ -35,7 +36,7 @@ class ContactsController extends ApiController
      */
     public function store(Request $request)
     {
-        return $this->contact->create($request->all());
+        return $this->person->paginate($request->all());
     }
 
     /**
@@ -46,7 +47,7 @@ class ContactsController extends ApiController
      */
     public function show($id)
     {
-        return $this->contact->find($id);
+        return $this->person->find($id);
     }
 
 
@@ -59,7 +60,7 @@ class ContactsController extends ApiController
      */
     public function update(Request $request, $id)
     {
-        return $this->contact->update($id, $request->all());
+        return $this->person->update($id, $request->all());
     }
 
     /**
@@ -70,6 +71,6 @@ class ContactsController extends ApiController
      */
     public function destroy($id)
     {
-        return $this->contact->delete($id);
+        return $this->person->delete($id);
     }
 }

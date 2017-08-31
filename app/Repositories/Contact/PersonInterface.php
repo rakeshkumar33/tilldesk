@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories\Person;
+namespace App\Repositories\Contact;
 
-interface LanguageInterface
+interface PersonInterface
 {
     public function find($id);
 

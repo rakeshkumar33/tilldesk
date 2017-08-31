@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V1\General;
 
 use App\Http\Controllers\Api\ApiController;
-use App\Repositories\Person\EloquentCountryRepository;
+use App\Repositories\General\CurrencyRepository;
 use Illuminate\Http\Request;
 
-class CountriesController extends ApiController
+class CurrenciesController extends ApiController
 {
 
-    protected $country;
+    protected $currency;
 
-    public function __construct(EloquentCountryRepository $country)
+    public function __construct(CurrencyRepository $currency)
     {
-        $this->country = $country;
+        $this->currency = $currency;
     }
 
     /**
@@ -23,8 +23,9 @@ class CountriesController extends ApiController
      */
     public function index()
     {
-        return $this->country->paginate();
+        return $this->currency->paginate();
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -34,7 +35,7 @@ class CountriesController extends ApiController
      */
     public function store(Request $request)
     {
-        return $this->country->create($request->all());
+        return $this->currency->create($request->all());
     }
 
     /**
@@ -45,8 +46,11 @@ class CountriesController extends ApiController
      */
     public function show($id)
     {
-        return $this->country->find($id);
+        return $this->currency->find($id);
+
     }
+
+
 
     /**
      * Update the specified resource in storage.
@@ -57,7 +61,7 @@ class CountriesController extends ApiController
      */
     public function update(Request $request, $id)
     {
-        return $this->country->update($id, $request->all());
+        return $this->currency->update($id, $request->all());
     }
 
     /**
@@ -68,6 +72,6 @@ class CountriesController extends ApiController
      */
     public function destroy($id)
     {
-        return $this->country->delete($id);
+        return $this->currency->delete($id);
     }
 }
