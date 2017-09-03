@@ -2,12 +2,16 @@
 
 namespace App\Repositories;
 
+use App\Traits\HasHashIds;
 use Illuminate\Foundation\Application;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
 abstract class EloquentRepository implements RepositoryInterface
 {
+
+    use HasHashIds;
+
     /**
      * The Illuminate Application instance.
      * @var Application

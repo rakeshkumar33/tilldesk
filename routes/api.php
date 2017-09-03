@@ -19,9 +19,12 @@ use Illuminate\Http\Request;
 
 
 
-Route::group(['middleware' => ['auth:api'],'namespace' => 'Api\V1', 'prefix' => 'v1'], function ($app) {
+Route::group(['namespace' => 'Api\V1', 'prefix' => 'v1'], function ($app) {
 
-    $app->group(['namespace' => 'Contacts', 'prefix' => 'contacts'], function ($app) {
+
+    $app->get('users', 'UsersController@index');
+
+    $app->group(['middleware' => ['auth:api'], 'namespace' => 'Contacts', 'prefix' => 'contacts'], function ($app) {
 
         $app->get('/', 'ContactsController@index');
         $app->post('/', 'ContactsController@store');

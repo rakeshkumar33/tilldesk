@@ -1,9 +1,42 @@
-
 // Fonts
 //@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
-
 // Variables
 @import "variables";
-
 // Bootstrap
 @import "~bootstrap/dist/css/bootstrap";
+
+.form-control:focus {
+  border-color: rgba(0, 0, 0, .15);
+  box-shadow: 0 0 0 3px rgba(191, 223, 255, 1);;
+}
+
+.dropdown-menu::before,
+.dropdown-menu::after {
+  position: absolute;
+  display: inline-block;
+  content: "";
+}
+
+.dropdown-menu::before {
+  border: 8px solid transparent;
+  border-bottom-color: rgba(27, 31, 35, 0.15);
+}
+
+.dropdown-menu::after {
+  border: 7px solid transparent;
+  border-bottom-color: #fff;
+}
+
+.dropdown-menu-right::before {
+  top: -17px;
+  right: 9px;
+  left: auto;
+}
+
+.dropdown-menu-right::after {
+  top: -14px;
+  right: 10px;
+  left: auto;
+}
+
+

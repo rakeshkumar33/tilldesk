@@ -14,10 +14,14 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+{{ csrf_field() }}
+</form>
     <div id="app">
 
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-default">
 
             <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
@@ -28,82 +32,70 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
+
+
+                @guest
+                <ul class="mr-auto">
+
+                </ul>
+                @else
+
+                <form class="form-inline mr-auto">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0 hidden" type="submit">Search</button>
+                </form>
+                @endguest
+
+
+
+                <ul class="navbar-nav my-2 my-lg-0">
+
+                    @guest
+                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Get started</a></li>
+
+                    @else
                     <li class="nav-item active">
                         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link" href="{{ url('invoices') }}">Invoices</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Disabled</a>
+                        <a class="nav-link" href="{{ url('contacts') }}">Contacts</a>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                            <div id="avatar"></div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="{{ url('settings/profile') }}">Profile</a>
+                            <a class="dropdown-item" href="{{ url('settings/company') }}">Account</a>
+
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                            Log out
+                            </a>
+
+                        </div>
+                    </li>
+                    @endguest
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
             </div>
         </nav>
 
 
-        {{--<nav class="navbar navbar-default navbar-static-top">--}}
-            {{--<div class="container">--}}
-                {{--<div class="navbar-header">--}}
+       <div class="container">
+           <div class="row">
+               <div class="col-md-8">
+                   @yield('content')
+               </div>
+           </div>
+       </div>
 
-                    {{--<!-- Collapsed Hamburger -->--}}
-                    {{--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">--}}
-                        {{--<span class="sr-only">Toggle Navigation</span>--}}
-                        {{--<span class="icon-bar"></span>--}}
-                        {{--<span class="icon-bar"></span>--}}
-                        {{--<span class="icon-bar"></span>--}}
-                    {{--</button>--}}
 
-                    {{--<!-- Branding Image -->--}}
-                    {{--<a class="navbar-brand" href="{{ url('/') }}">--}}
-                        {{--{{ config('app.name', 'Laravel') }}--}}
-                    {{--</a>--}}
-                {{--</div>--}}
-
-                {{--<div class="collapse navbar-collapse" id="app-navbar-collapse">--}}
-                    {{--<!-- Left Side Of Navbar -->--}}
-                    {{--<ul class="nav navbar-nav">--}}
-                        {{--&nbsp;--}}
-                    {{--</ul>--}}
-
-                    {{--<!-- Right Side Of Navbar -->--}}
-                    {{--<ul class="nav navbar-nav navbar-right">--}}
-                        {{--<!-- Authentication Links -->--}}
-                        {{--@guest--}}
-                            {{--<li><a href="{{ route('login') }}">Login</a></li>--}}
-                            {{--<li><a href="{{ route('register') }}">Get started</a></li>--}}
-                        {{--@else--}}
-                            {{--<li class="dropdown">--}}
-                                {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">--}}
-                                    {{--{{ Auth::user()->name }} <span class="caret"></span>--}}
-                                {{--</a>--}}
-
-                                {{--<ul class="dropdown-menu" role="menu">--}}
-                                    {{--<li>--}}
-                                        {{--<a href="{{ route('logout') }}"--}}
-                                            {{--onclick="event.preventDefault();--}}
-                                                     {{--document.getElementById('logout-form').submit();">--}}
-                                            {{--Logout--}}
-                                        {{--</a>--}}
-
-                                        {{--<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
-                                            {{--{{ csrf_field() }}--}}
-                                        {{--</form>--}}
-                                    {{--</li>--}}
-                                {{--</ul>--}}
-                            {{--</li>--}}
-                        {{--@endguest--}}
-                    {{--</ul>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</nav>--}}
-
-        @yield('content')
     </div>
 
     <!-- Scripts -->

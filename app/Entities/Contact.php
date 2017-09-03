@@ -4,6 +4,7 @@ namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use App\Traits\HasHashIds;
 
 class Contact extends Model
 {
@@ -13,14 +14,23 @@ class Contact extends Model
 
 
 
+    /**
+     * Get all of the owning contactable models.
+     */
+    public function contactable()
+    {
+        return $this->morphTo();
+    }
+
+
     public function addresses()
     {
-        return $this->morphToMany(Address::class, 'addressable');
+        return $this->morphMany(Address::class, 'addressable');
     }
 
 
     public function people()
     {
-        return $this->morphToMany(Person::class, 'personable');
+        return $this->morphMany(Person::class, 'personable');
     }
 }
