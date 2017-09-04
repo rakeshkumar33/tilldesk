@@ -13,7 +13,7 @@
             @endif
 
 
-            <form class="" method="POST" action="{{ route('register') }}" autocomplete="off">
+            <form class="" method="POST" action="{{ url('contacts') }}" autocomplete="off">
                 {{ csrf_field() }}
 
 
@@ -28,7 +28,7 @@
 
                 @include('app.account.company._phone')
 
-                @include('app.account.company._address_form')
+                @include('app.account.company._address')
 
 
                 @include('app.account.company._memo')

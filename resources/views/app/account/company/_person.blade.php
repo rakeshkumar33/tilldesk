@@ -5,7 +5,7 @@
             <label for="first_name" class="control-label">First name</label>
 
 
-            <input id="first_name" type="text" class="form-control" name="first_name" required />
+            <input id="first_name" type="text" class="form-control" name="first_name"  />
 
             @if ($errors->has('first_name'))
                 <span class="help-block">
@@ -22,7 +22,7 @@
 
 
             <input id="last_name" type="text" class="form-control" name="last_name"
-                   value="{{ old('last_name') }}" required />
+                   value="{{ old('last_name') }}"  />
 
             @if ($errors->has('last_name'))
                 <span class="help-block">

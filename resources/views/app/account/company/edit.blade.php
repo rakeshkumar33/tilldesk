@@ -8,7 +8,7 @@
             <h3 class="card-title">Account</h3>
 
 
-                <form class="" method="POST" action="{{ route('register') }}" autocomplete="off">
+                <form action="{{ url('/settings/company') }}" method="POST"  autocomplete="off">
                     {{ csrf_field() }}
 
 
@@ -18,11 +18,11 @@
 
                     @include('app.account.company._person')
 
-
-
-
-                    @include('app.account.company._address_form')
+                    @include('app.account.company._email')
                     @include('app.account.company._phone')
+
+
+                    @include('app.account.company._address')
 
                     <div class="form-group">
 

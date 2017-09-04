@@ -27,6 +27,8 @@ Route::group(['namespace' => 'App\Account', 'prefix' => 'settings'], function ($
     });
 
     $app->get('/company', 'OrganizationController@editOrganisation');
+    $app->post('/company', 'OrganizationController@updateOrganisation');
+
 
     $app->get('/profile', 'ProfileController@editProfile');
 

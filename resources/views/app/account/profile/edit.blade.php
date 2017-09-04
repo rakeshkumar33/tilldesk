@@ -51,8 +51,15 @@
                     <label for="timezone" class="control-label">Time zone</label>
 
 
-                    <input id="timezone" type="text" class="form-control" name="timezone"
-                           value="{{ old('timezone') }}" required/>
+
+
+                    <select name="timezone" id="timezone" class="form-control" required>
+                        <option value="">Pick your timezone</option>
+                        @foreach (timezone_identifiers_list() as $timezone)
+                            <option value="{{ $timezone }}"{{ $timezone == old('timezone') ? ' selected' : '' }}>{{ $timezone }}</option>
+                        @endforeach
+                    </select>
+
 
                     @if ($errors->has('timezone'))
                         <span class="help-block">

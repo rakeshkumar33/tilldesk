@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 
+use Faker\Provider\Company;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -15,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'timezone', 'first_day',
+        'name', 'email', 'password', 'timezone', 'first_day', 'current_org_id',
     ];
 
     /**
@@ -27,8 +28,33 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function companies()
+
+    protected $casts = [
+        'preference' => 'array'
+    ];
+
+    public function orgs()
     {
-        return $this->belongsToMany(Organization::class);
+        return $this->belongsToMany(Organization::class)->withPivot(['is_owner', 'role'])->withTimestamps();
+    }
+
+
+
+    public function ownedOrgs()
+    {
+        return $this->orgs()->wherePivot( "is_owner", "=", true );
+    }
+
+
+    public function currentOrg()
+    {
+        return $this->hasOne( Organization::class, 'id' , 'current_org_id'  );
+    }
+
+
+    public function me()
+    {
+        return $this->morphOne(Contact::class, 'contactable');
+
     }
 }

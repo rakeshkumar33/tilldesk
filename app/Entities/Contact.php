@@ -13,6 +13,9 @@ class Contact extends Model
     protected $guarded = [];
 
 
+    protected $casts = [
+        'preference' => 'array'
+    ];
 
     /**
      * Get all of the owning contactable models.
@@ -23,14 +26,48 @@ class Contact extends Model
     }
 
 
+    /**
+     * Returns primary address
+     */
+    public function primaryAddress()
+    {
+        return $this->morphOne(Address::class, 'addressable')->where('is_primary', true);
+
+    }
+
+    /**
+     * Returns primary contact person
+     */
+    public function primaryContact()
+    {
+        return $this->morphOne(Person::class, 'personable')->where('is_primary', true);
+
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
     public function addresses()
     {
         return $this->morphMany(Address::class, 'addressable');
     }
 
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
     public function people()
     {
         return $this->morphMany(Person::class, 'personable');
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     */
+    public function memorandum()
+    {
+        return $this->morphOne(Memo::class, 'memorandum');
     }
 }

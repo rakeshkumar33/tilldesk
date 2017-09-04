@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Entities\Organization;
 use App\Entities\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -62,13 +63,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-         $user = User::create([
+        $org = Organization::create(['name' => $data['business_name']]);
+
+        $org->users()->create([
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'current_org_id' => $org->id
         ]);
 
-        $user->companies()->create(['name' => $data['name']]);
-
-        return  $user;
+        return  $org->users->first();
     }
 }

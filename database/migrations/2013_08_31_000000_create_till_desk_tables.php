@@ -15,11 +15,11 @@ class CreateTillDeskTables extends Migration
     {
         Schema::create('countries', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 80);
-            $table->string('nice_name', 80);
-            $table->string('iso', 2);
-            $table->string('iso3', 3);
-            $table->string('phone_code', 5);
+            $table->string('name', 80)->unsigned();
+            $table->string('nice_name', 80)->unsigned();
+            $table->string('iso', 2)->unsigned();
+            $table->string('iso3', 3)->unsigned();
+            $table->string('phone_code', 5)->unsigned();
             $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
@@ -27,7 +27,7 @@ class CreateTillDeskTables extends Migration
 
         Schema::create('states', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name')->unsigned();
             $table->integer('country_id')->unsigned();
             $table->foreign('country_id')
                 ->references('id')->on('countries')
@@ -39,7 +39,7 @@ class CreateTillDeskTables extends Migration
 
         Schema::create('cities', function (Blueprint $table) {
             $table->increments('id');
-            $table->string("name");
+            $table->string("name")->unsigned();
             $table->integer('state_id')->unsigned();
             $table->foreign('state_id')
                 ->references('id')->on('states')
@@ -51,9 +51,9 @@ class CreateTillDeskTables extends Migration
 
         Schema::create('currencies', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 20);
-            $table->string('code', 10);
-            $table->string('symbol', 20);
+            $table->string('name', 20)->unsigned();
+            $table->string('code', 10)->unsigned();
+            $table->string('symbol', 20)->unsigned();
             $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
@@ -61,9 +61,9 @@ class CreateTillDeskTables extends Migration
 
         Schema::create('languages', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 20);
-            $table->string('native_name', 100);
-            $table->string('code', 10);
+            $table->string('name', 20)->unsigned();
+            $table->string('native_name', 100)->unsigned();
+            $table->string('code', 10)->unsigned();
             $table->boolean('is_active')->default(false);
             $table->timestamps();
         });

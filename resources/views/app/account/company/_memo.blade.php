@@ -2,7 +2,7 @@
     <label for="memo" class="control-label">Notes</label>
 
 
-    <textarea id="memo" class="form-control" name="memo" required></textarea>
+    <textarea id="memo" class="form-control" name="memo"></textarea>
 
     @if ($errors->has('memo'))
         <span class="help-block">

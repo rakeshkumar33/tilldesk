@@ -2,7 +2,7 @@
     <label for="email" class="control-label">Email address</label>
 
 
-    <input id="email" type="email" class="form-control" name="email" required/>
+    <input id="email" type="email" class="form-control" name="email" />
 
     @if ($errors->has('email'))
         <span class="help-block">

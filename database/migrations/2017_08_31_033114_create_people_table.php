@@ -16,8 +16,13 @@ class CreatePeopleTable extends Migration
         Schema::create('people', function (Blueprint $table) {
             $table->increments('id');
             $table->morphs('personable');
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->boolean('is_primary')->default(false);
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('title')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->jsonb('preference')->default("{}");
             $table->timestamps();
         });
     }

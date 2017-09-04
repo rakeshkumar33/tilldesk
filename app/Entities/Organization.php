@@ -8,17 +8,21 @@ class Organization extends Model
 {
     protected $guarded = [];
 
+    protected $casts = [
+        'preference' => 'array'
+    ];
+
 
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)->withPivot(['is_owner', 'role'])->withTimestamps();
     }
 
 
 
-    public function primaryContact()
+    public function contactInfo()
     {
-        return $this->morphOne(Contact::class, 'contactable');
+        return $this->morphOne(Contact::class, 'contactable')->where('is_primary', true);
 
     }
 

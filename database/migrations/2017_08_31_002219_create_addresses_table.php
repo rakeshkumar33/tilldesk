@@ -16,11 +16,11 @@ class CreateAddressesTable extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->increments('id');
             $table->morphs('addressable');
-            $table->string('line_1');
-            $table->string('line_2');
-            $table->string('zip_code');
-            $table->string('city');
-
+            $table->boolean('is_primary')->default(false);
+            $table->string('line_1')->nullable();
+            $table->string('line_2')->nullable();
+            $table->string('city')->nullable();
+            $table->string('zip_code')->nullable();
             $table->integer('state_id')->unsigned();
             $table->foreign('state_id')
                 ->references('id')->on('states')
@@ -31,8 +31,8 @@ class CreateAddressesTable extends Migration
                 ->references('id')->on('countries')
                 ->onDelete('cascade');
 
-            $table->float('latitude', 10, 6);
-            $table->float('longitude', 10, 6);
+            $table->float('latitude', 10, 6)->nullable();
+            $table->float('longitude', 10, 6)->nullable();
             $table->timestamps();
         });
     }

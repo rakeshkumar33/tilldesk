@@ -13,6 +13,11 @@ class Person extends Model
     protected $guarded = [];
 
 
+    protected $casts = [
+        'preference' => 'array'
+    ];
+
+
     /**
      * Get all of the owning personable models.
      */

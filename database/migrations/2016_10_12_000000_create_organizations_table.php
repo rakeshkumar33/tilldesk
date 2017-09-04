@@ -18,7 +18,7 @@ class CreateOrganizationsTable extends Migration
             $table->string('name');
             $table->string('billing_email')->nullable();
             $table->string('company_name')->nullable();
-            $table->string('plan')->nullable();
+            $table->jsonb('preference')->default("{}");
             $table->timestamps();
         });
 

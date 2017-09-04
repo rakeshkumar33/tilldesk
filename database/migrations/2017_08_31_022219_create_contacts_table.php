@@ -16,8 +16,12 @@ class CreateContactsTable extends Migration
         Schema::create('contacts', function (Blueprint $table) {
             $table->increments('id');
             $table->morphs('contactable');
+            $table->boolean('is_primary')->default(false);
             $table->string('category')->default('organisation');
-            $table->string('name');
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->jsonb('preference')->default("{}");
             $table->timestamps();
         });
     }
