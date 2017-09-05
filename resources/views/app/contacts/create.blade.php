@@ -23,11 +23,6 @@
                 @include('app.account.company._person')
 
 
-
-                @include('app.account.company._email')
-
-                @include('app.account.company._phone')
-
                 @include('app.account.company._address')
 
 

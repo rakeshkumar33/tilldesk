@@ -22,12 +22,17 @@ class OrganizationController extends Controller
     {
         $currenctId = $this->currentOrg()->current_org_id;
 
-        $account = Organization::with(['contactInfo'])->find($currenctId);
+//        $account = Organization::with(['contactInfo'])->find($currenctId);
 
-        $data = Contact::with(['primaryAddress', 'primaryContact'])
-            ->where('contactable_type', 'App\Entities\Organization')->where('contactable_id', $account->id)->first();
+        $data = Contact::with(['primaryAddress', 'primaryPerson'])
+            ->where('contactable_type', 'App\Entities\Organization')
+            ->where('contactable_id', $currenctId)
+            ->where('is_primary', true)
+            ->first();
 
-        return $data;
+//        if( count($data) > 0) {
+//            return $data;
+//        }
 
         return view('app.account.company.edit', compact('data'));
     }
@@ -52,6 +57,8 @@ class OrganizationController extends Controller
             'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name'),
             'title' => $request->get('title'),
+            'email' => $request->get('email'),
+            'phone' => $request->get('phone'),
             'is_primary' => true
         ];
 

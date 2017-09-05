@@ -1,13 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Register</div>
 
-                    <div class="panel-body">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">Create your account.</h3>
+
+
                         <form class="" method="POST" action="{{ route('register') }}" autocomplete="off">
                             {{ csrf_field() }}
 
@@ -42,7 +41,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('business_name') ? ' has-error' : '' }}">
-                                <label for="name" class="control-label">Your business name</label>
+                                <label for="business_name" class="control-label">Your business name</label>
 
 
                                 <input id="business_name" type="text" class="form-control" name="business_name"
@@ -66,7 +65,5 @@
                         </form>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+
 @endsection

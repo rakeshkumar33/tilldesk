@@ -31,6 +31,9 @@ Route::group(['namespace' => 'App\Account', 'prefix' => 'settings'], function ($
 
 
     $app->get('/profile', 'ProfileController@editProfile');
+    $app->post('/profile', 'ProfileController@updateProfile');
+
+
 
     $app->get('/password', 'PasswordController@editPassword');
 

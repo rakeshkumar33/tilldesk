@@ -19,18 +19,10 @@ class CreateAddressesTable extends Migration
             $table->boolean('is_primary')->default(false);
             $table->string('line_1')->nullable();
             $table->string('line_2')->nullable();
-            $table->string('city')->nullable();
             $table->string('zip_code')->nullable();
-            $table->integer('state_id')->unsigned();
-            $table->foreign('state_id')
-                ->references('id')->on('states')
-                ->onDelete('cascade');
-
-            $table->integer('country_id')->unsigned();
-            $table->foreign('country_id')
-                ->references('id')->on('countries')
-                ->onDelete('cascade');
-
+            $table->string('city_id')->nullable()->unsigned();
+            $table->integer('state_id')->nullable()->unsigned();
+            $table->integer('country_id')->nullable()->unsigned();
             $table->float('latitude', 10, 6)->nullable();
             $table->float('longitude', 10, 6)->nullable();
             $table->timestamps();

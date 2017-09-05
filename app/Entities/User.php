@@ -33,6 +33,17 @@ class User extends Authenticatable
         'preference' => 'array'
     ];
 
+
+    public $weekDays = [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday'
+    ];
+
     public function orgs()
     {
         return $this->belongsToMany(Organization::class)->withPivot(['is_owner', 'role'])->withTimestamps();
@@ -52,9 +63,9 @@ class User extends Authenticatable
     }
 
 
-    public function me()
+    public function primaryPerson()
     {
-        return $this->morphOne(Contact::class, 'contactable');
+        return $this->morphOne(Person::class, 'personable');
 
     }
 }

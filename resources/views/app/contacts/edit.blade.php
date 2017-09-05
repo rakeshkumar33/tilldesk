@@ -1,36 +1,39 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
 
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">Add Contact</h3>
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
 
-                        <form class="form-horizontal" method="POST" action="{{ route('login') }}">
+                        <form class="" method="POST" action="{{ url('contacts/'.$data->id) }}">
                             {{ csrf_field() }}
+                            {{ method_field('patch') }}
+
+                            @include('app.account.company._contact')
+
+
+                            @include('app.account.company._person')
+
+
+                            @include('app.account.company._address')
+
+
+                            @include('app.account.company._memo')
 
                             <div class="form-group">
-                                <label for="person">
-                                    <input type="radio" name="category" value="person" id="person" />
-                                </label>
 
-                                <label for="business">
-                                    <input type="radio" name="category" value="business" id="business" />
-                                </label>
-
+                                <button type="submit" class="btn btn-primary">
+                                    Save changes
+                                </button>
                             </div>
                         </form>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+
 @endsection

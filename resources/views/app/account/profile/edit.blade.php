@@ -2,46 +2,41 @@
 
 @section('content')
 
+
+
+
+
+
     <div class="card">
         <div class="card-body">
             <h3 class="card-title">My profile</h3>
 
 
-            <form class="" method="POST" action="{{ route('register') }}" autocomplete="off">
+            <form class="" method="POST" action="{{ url('/settings/profile') }}" autocomplete="off">
                 {{ csrf_field() }}
 
 
-                @include('app.account.company._person')
+                @include('app.account.company._person', ['hasEmail' => false, 'hasPhone' => false])
 
 
-
-                <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                    <label for="title" class="control-label">Title</label>
-
-
-                    <input id="title" type="text" class="form-control" name="title"
-                           value="{{ old('title') }}" required/>
-
-                    @if ($errors->has('title'))
-                        <span class="help-block">
-                                        <strong>{{ $errors->first('title') }}</strong>
-                                    </span>
-                    @endif
-
-                </div>
 
 
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                     <label for="email" class="control-label">Email address</label>
 
 
-                    <input id="email" type="email" class="form-control" name="email"
-                           value="{{ old('email') }}" required/>
+                    <input
+                            id="email"
+                            type="email"
+                            class="form-control"
+                            name="email"
+                            value="{{ $data->email ? $data->email : old('email') }}"/>
+
 
                     @if ($errors->has('email'))
                         <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
+                            <strong>{{ $errors->first('email') }}</strong>
+                        </span>
                     @endif
 
                 </div>
@@ -49,8 +44,6 @@
 
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                     <label for="timezone" class="control-label">Time zone</label>
-
-
 
 
                     <select name="timezone" id="timezone" class="form-control" required>
@@ -63,8 +56,8 @@
 
                     @if ($errors->has('timezone'))
                         <span class="help-block">
-                                        <strong>{{ $errors->first('timezone') }}</strong>
-                                    </span>
+                            <strong>{{ $errors->first('timezone') }}</strong>
+                        </span>
                     @endif
 
                 </div>
@@ -79,8 +72,8 @@
 
                     @if ($errors->has('first_week_day'))
                         <span class="help-block">
-                                        <strong>{{ $errors->first('first_week_day') }}</strong>
-                                    </span>
+                            <strong>{{ $errors->first('first_week_day') }}</strong>
+                        </span>
                     @endif
 
                 </div>

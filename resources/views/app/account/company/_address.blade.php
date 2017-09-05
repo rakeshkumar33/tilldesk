@@ -2,7 +2,12 @@
     <label for="line_1" class="control-label">Address 1</label>
 
 
-    <input id="line_1" type="text" class="form-control" name="line_1" />
+    <input
+            id="line_1"
+            type="text"
+            class="form-control"
+            name="line_1"
+            value="{{ isset($data->primaryAddress->line_1) &&  $data->primaryAddress->line_1 ? $data->primaryAddress->line_1 : old('line_1') }}" />
 
     @if ($errors->has('line_1'))
         <span class="help-block">
@@ -17,7 +22,7 @@
 
 
     <input id="line_2" type="text" class="form-control" name="line_2"
-           value="{{ old('line_2') }}" />
+           value="{{ isset($data->primaryAddress->line_2) && $data->primaryAddress->line_2 ? $data->primaryAddress->line_2 : old('line_2') }}" />
 
     @if ($errors->has('line_2'))
         <span class="help-block">
@@ -35,7 +40,8 @@
             <label for="city" class="control-label">City</label>
 
 
-            <input id="city" type="text" class="form-control" name="city" />
+            <input id="city" type="text" class="form-control" name="city"
+                   value="{{ isset($data->primaryAddress->city) && $data->primaryAddress->city ? $data->primaryAddress->city : old('city') }}" />
 
             @if ($errors->has('city'))
                 <span class="help-block">
@@ -53,7 +59,7 @@
 
 
             <input id="zip_code" type="text" class="form-control" name="zip_code"
-                   value="{{ old('zip_code') }}" />
+                   value="{{ isset($data->primaryAddress->zip_code) && $data->primaryAddress->zip_code ? $data->primaryAddress->zip_code : old('zip_code') }}" />
 
             @if ($errors->has('zip_code'))
                 <span class="help-block">
@@ -74,7 +80,8 @@
             <label for="country" class="control-label">Country</label>
 
 
-            <input id="country" type="text" class="form-control" name="country" />
+            <input id="country" type="text" class="form-control" name="country"
+                   value="{{ isset($data->primaryAddress->country_id) && $data->primaryAddress->country_id ? $data->primaryAddress->country_id : old('country') }}" />
 
             @if ($errors->has('country'))
                 <span class="help-block">
@@ -92,7 +99,7 @@
 
 
             <input id="state" type="text" class="form-control" name="state"
-                   value="{{ old('state') }}" />
+                   value="{{ isset($data->primaryAddress->state_id) && $data->primaryAddress->state_id ? $data->primaryAddress->state_id : old('state') }}" />
 
             @if ($errors->has('state'))
                 <span class="help-block">

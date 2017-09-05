@@ -22,6 +22,7 @@
 
 
         <nav class="navbar navbar-expand-lg navbar-default">
+            <div class="container">
 
             <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
@@ -67,8 +68,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-                            <div id="avatar"></div>
-                        </a>
+                            Account                        </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="{{ url('settings/profile') }}">Profile</a>
                             <a class="dropdown-item" href="{{ url('settings/company') }}">Account</a>
@@ -83,6 +83,7 @@
                     </li>
                     @endguest
                 </ul>
+            </div>
             </div>
         </nav>
 

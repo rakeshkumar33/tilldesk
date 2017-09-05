@@ -38,7 +38,7 @@ class Contact extends Model
     /**
      * Returns primary contact person
      */
-    public function primaryContact()
+    public function primaryPerson()
     {
         return $this->morphOne(Person::class, 'personable')->where('is_primary', true);
 

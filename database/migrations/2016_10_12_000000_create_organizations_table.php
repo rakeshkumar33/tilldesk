@@ -35,6 +35,9 @@ class CreateOrganizationsTable extends Migration
             $table->boolean('is_owner')->default(false);
             $table->string('role')->default('member');
             $table->timestamps();
+
+            $table->primary(['organization_id','user_id']);
+
         });
 
     }

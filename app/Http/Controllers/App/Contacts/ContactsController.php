@@ -26,7 +26,19 @@ class ContactsController extends Controller
      */
     public function index()
     {
-        $data = $this->contact->paginate();
+//        $data = $this->contact->paginate();
+
+
+        $account = Auth::user()->current_org_id;
+
+        $data = Contact::with(['primaryAddress', 'primaryPerson', 'memorandum'])
+            ->where('contactable_type', 'App\Entities\Organization')
+            ->where('contactable_id', $account)
+            ->where('is_primary', false)
+            ->paginate(10);
+
+//        return $data;
+
 
         return view('app.contacts.index', compact('data'));
     }
@@ -67,6 +79,8 @@ class ContactsController extends Controller
             'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name'),
             'title' => $request->get('title'),
+            'email' => $request->get('email'),
+            'phone' => $request->get('phone'),
             'is_primary' => true
         ];
 
@@ -81,13 +95,13 @@ class ContactsController extends Controller
         ];
 
 
-        $currenctOrg->contactInfo()->create($contactData);
+        $contact = $currenctOrg->contactInfo()->create($contactData);
 
-        $currenctOrg->contactInfo->people()->create($personData);
+        $contact->people()->create($personData);
 
-        $currenctOrg->contactInfo->addresses()->create($addressData);
+        $contact->addresses()->create($addressData);
 
-        $currenctOrg->contactInfo->memorandum()->create([
+        $contact->memorandum()->create([
             'memo' => $request->get('memo'),
         ]);
 
@@ -121,14 +135,13 @@ class ContactsController extends Controller
 
         $account = Auth::user()->current_org_id;
 
-//        $currenctId = $this->currentOrg()->current_org_id;
-//
-//        $account = Organization::with(['contactInfo'])->find($currenctId);
+        $data = Contact::with(['primaryAddress', 'primaryPerson', 'memorandum'])
+            ->where('contactable_type', 'App\Entities\Organization')
+            ->where('contactable_id', $account)
+            ->where('is_primary', false)
+            ->find($id);
 
-        $data = Contact::with(['primaryAddress', 'primaryContact'])
-            ->where('contactable_type', 'App\Entities\Organization')->where('contactable_id', $account)->find($id);
-
-        return $data;
+//        return $data;
 
 
 
@@ -145,7 +158,70 @@ class ContactsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return $this->contact->update($id, $request->all());
+        $currenctOrgId = Auth::user()->with('currentOrg')->first()->current_org_id;
+
+        $currentOrg= Organization::find($currenctOrgId);
+//        $currenctContact = Contact::find($id);
+
+        $contact = $currentOrg->contactInfo->find($id);
+
+        $contactData = [
+            'category' => $request->get('type'),
+            'name' => $request->get('name'),
+            'email' => $request->get('email'),
+            'phone' => $request->get('phone'),
+            'is_primary' => false
+        ];
+
+        $personData = [
+            'first_name' => $request->get('first_name'),
+            'last_name' => $request->get('last_name'),
+            'title' => $request->get('title'),
+            'email' => $request->get('email'),
+            'phone' => $request->get('phone'),
+            'is_primary' => true
+        ];
+
+        $addressData = [
+            'line_1' => $request->get('line_1'),
+            'line_2' => $request->get('line_2'),
+            'city' => $request->get('city'),
+            'zip_code' => $request->get('zip_code'),
+            'state_id' => $request->get('state'),
+            'country_id' => $request->get('country'),
+            'is_primary' => true
+        ];
+
+        $contact->updateOrCreate([
+            'contactable_id' => $currenctOrgId,
+            'contactable_type' => get_class($currentOrg)
+        ], $contactData);
+
+
+        $contact->people()->updateOrCreate([
+            'personable_id' => $id,
+            'personable_type' => get_class($currentOrg->contactInfo)
+        ], $personData);
+
+
+        $contact->addresses()->updateOrCreate([
+            'addressable_id' => $id,
+            'addressable_type' => get_class($currentOrg->contactInfo)
+        ], $addressData);
+
+
+        $contact->memorandum()->updateOrCreate([
+            'memorandum_id' => $id,
+            'memorandum_type' => get_class($currentOrg->contactInfo),
+        ], [
+            'memo' => $request->get('memo'),
+        ]);
+
+
+
+        return $contact->with(['primaryAddress', 'primaryPerson', 'memorandum'])->find($id);
+
+//        return $this->contact->update($id, $request->all());
     }
 
     /**

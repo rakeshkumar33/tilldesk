@@ -13,6 +13,11 @@ class Organization extends Model
     ];
 
 
+    protected static function boot()
+    {
+        parent::boot();
+    }
+
     public function users()
     {
         return $this->belongsToMany(User::class)->withPivot(['is_owner', 'role'])->withTimestamps();
