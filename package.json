@@ -13,14 +13,17 @@
         "axios": "^0.16.2",
         "babel-preset-react": "^6.23.0",
         "bootstrap": "^4.0.0-beta",
+        "bootstrap-sass": "^3.3.7",
         "cross-env": "^5.0.1",
         "jquery": "^3.1.1",
         "laravel-mix": "^1.0",
         "lodash": "^4.17.4",
         "popper.js": "^1.12.5",
-        "react": "^15.4.2",
-        "react-dom": "^15.4.2"
+        "react": "^16.5.2",
+        "react-dom": "^16.5.2",
+        "@blueprintjs/core": "^3.6.1"
     },
     "dependencies": {
+
     }
 }
